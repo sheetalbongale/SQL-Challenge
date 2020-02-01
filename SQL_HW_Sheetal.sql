@@ -39,8 +39,7 @@ SELECT
 FROM actor
 WHERE last_name LIKE '%LI%'
 ORDER BY 
-	last_name,
-    first_name;
+	last_name, first_name;
 
 -- 2d. Using IN, display the country_id and country columns of the following countries: 
 -- Afghanistan, Bangladesh, and China:
@@ -215,7 +214,7 @@ FROM film f
 INNER JOIN inventory i ON (f.film_id = i.film_id)
 INNER JOIN rental r ON (i.inventory_id = r.inventory_id)
 GROUP by title
-ORDER BY Rentals desc;
+ORDER BY Rentals DESC;
 
 -- 7f. Write a query to display how much business, in dollars, each store brought in.
 SELECT 
@@ -240,7 +239,7 @@ JOIN country USING (country_id);
 -- 7h. List the top five genres in gross revenue in descending order. 
 -- (Hint: you may need to use the following tables: category, film_category, inventory, payment, and rental.)
 SELECT 
-	name, 
+	name AS 'Genre', 
 	SUM(amount) AS 'Gross Revenue $'
 FROM rental
 JOIN inventory USING (inventory_id)
@@ -248,7 +247,7 @@ JOIN payment USING (rental_id)
 JOIN film_category USING (film_id)
 JOIN category USING (category_id)
 GROUP BY name
-ORDER BY SUM(amount) desc
+ORDER BY SUM(amount) DESC
 LIMIT 5;
 
 -- 8a. In your new role as an executive, you would like to have an easy way of viewing the Top five genres by gross revenue. 
