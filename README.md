@@ -1,9 +1,9 @@
 # MySQL and MySQLWorkbench Exercise
----
+
 This repository demonstrates - Performing MySQL queries utilizing MySQLWorkbench on Sakila database.
 Sakila database is a normalized schema modeling a DVD rental store, featuring tables like films, actors, film-actor relationships, a central inventory table that connects films, stores, and rentals.
 
-**Find the query file** [here](https://github.com/sheetalbongale/SQL-Challenge/blob/master/SQL_HW_Sheetal.sql)
+### Find the query file [here.](https://github.com/sheetalbongale/SQL-Challenge/blob/master/SQL_HW_Sheetal.sql)
 ---
 
 ## Installation Instructions
