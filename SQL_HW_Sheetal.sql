@@ -1,4 +1,4 @@
--- SQL and SQLWorkbench Homework | Feb 1, 2019
+-- SQL and SQLWorkbench Homework | Feb 1, 2020
 -- Submitted by : Sheetal Bongale | UT Data Analysis and Visualization
 -- MySQL and MySQLWorkbench exercise to execute queries on the Sakila database.
 -- --------------------------------------------------------------------------- --
@@ -9,24 +9,24 @@ SHOW TABLES;
 -- 1b. Display the first and last name of each actor in a single column in upper case letters. Name the column Actor Name.
 SELECT 
 	first_name,
-    last_name, 
+	last_name, 
 	CONCAT (first_name, ' ', last_name) AS 'Actor Name'
 FROM actor a;
 
 -- 2a. You need to find the ID number, first name, and last name of an actor, of whom you know only the first name, "Joe." 
 -- What is one query would you use to obtain this information?
 SELECT 
-	actor_id, 
-    first_name, 
-    last_name
+	actor_id,
+	first_name, 
+	last_name
 FROM actor
 WHERE first_name = 'Joe';
 
 -- 2b. Find all actors whose last name contain the letters GEN:
-SELECT 
+SELECT
 	actor_id, 
-    first_name, 
-    last_name
+	first_name, 
+	last_name
 FROM actor
 WHERE last_name LIKE '%GEN%';
     
@@ -34,8 +34,8 @@ WHERE last_name LIKE '%GEN%';
 -- This time, order the rows by last name and first name, in that order:
 SELECT 
 	actor_id, 
-    first_name, 
-    last_name
+	first_name, 
+	last_name
 FROM actor
 WHERE last_name LIKE '%LI%'
 ORDER BY 
@@ -46,7 +46,7 @@ ORDER BY
 -- Afghanistan, Bangladesh, and China:
 SELECT
 	country_id, 
-    country
+    	country
 FROM country
 WHERE country IN ('Afghanistan' , 'Bangladesh', 'China');
 
@@ -63,7 +63,7 @@ ALTER TABLE actor ADD column description BLOB;
 -- 4a. List the last names of actors, as well as how many actors have that last name.
 SELECT 
 	last_name,
-    COUNT(last_name)
+    	COUNT(last_name)
 FROM actor
 GROUP BY last_name;
 
@@ -71,7 +71,7 @@ GROUP BY last_name;
 -- but only for names that are shared by at least two actors:
 SELECT 
 	last_name, 
-    COUNT(last_name)
+    	COUNT(last_name)
 FROM actor
 GROUP BY last_name
 HAVING COUNT(last_name) >= 2;
@@ -96,8 +96,8 @@ SHOW CREATE TABLE address;
 -- Use the tables staff and address:
 SELECT 
 	s.first_name, 
-    s.last_name, 
-    a.address
+    	s.last_name, 
+    	a.address
 FROM staff s 
 LEFT JOIN address a ON s.address_id = a.address_id;
 
@@ -105,8 +105,8 @@ LEFT JOIN address a ON s.address_id = a.address_id;
 -- Use tables staff and payment.
 SELECT 
 	s.first_name, 
-    s.last_name, 
-    SUM(p.amount) AS 'Total Amount'
+    	s.last_name, 
+    	SUM(p.amount) AS 'Total Amount'
 FROM staff s 
 JOIN payment p ON s.staff_id = p.staff_id
 WHERE p.payment_date LIKE '2005-08%'
@@ -133,8 +133,8 @@ WHERE f.title = "Hunchback Impossible";
 -- List the customers alphabetically by last name:
 SELECT 
 	first_name, 
-    last_name, 
-    SUM(p.amount) AS "Total Payment"
+    	last_name, 
+    	SUM(p.amount) AS "Total Payment"
 FROM customer c
 INNER JOIN payment p ON c.customer_id = p.customer_id
 GROUP BY p.customer_id 
@@ -145,7 +145,7 @@ ORDER BY last_name;
 -- Use subqueries to display the titles of movies starting with the letters K and Q whose language is English.
 SELECT 
 	f.title,
-    l.name AS 'Language'
+    	l.name AS 'Language'
 FROM film f
 INNER JOIN language l ON f.language_id = l.language_id
 WHERE (l.name = 'English') AND f.title LIKE 'K%' OR f.title LIKE 'Q%';
@@ -160,7 +160,7 @@ WHERE actor_id IN
     Select actor_id
 	FROM film_actor
 	WHERE film_id IN 
-		(
+	(
 		SELECT film_id
 		FROM film
 		WHERE title = 'Alone Trip'
@@ -182,7 +182,7 @@ WHERE country = 'canada';
 -- Option 1:
 SELECT 
 	title,
-    category 
+    	category 
 FROM film_list
 WHERE category = 'family';
 -- Option 2:
@@ -199,7 +199,7 @@ WHERE film_id IN
 	SELECT film_id
 	FROM film_category
 	WHERE category_id IN
-		(
+	(
 		SELECT category_id 
 		FROM category AS c
 		WHERE c.name = 'Family'
@@ -208,7 +208,7 @@ WHERE film_id IN
 -- 7e. Display the most frequently rented movies in descending order.
 SELECT 
 	title, 
-    COUNT(title) as 'Rentals'
+    	COUNT(title) as 'Rentals'
 FROM film f
 INNER JOIN inventory i ON (f.film_id = i.film_id)
 INNER JOIN rental r ON (i.inventory_id = r.inventory_id)
@@ -228,8 +228,8 @@ GROUP BY store_id;
 -- 7g. Write a query to display for each store its store ID, city, and country.
 SELECT 
 	store_id,
-    city,
-    country
+    	city,
+    	country
 FROM store
 JOIN address USING (address_id)
 JOIN city USING (city_id)
@@ -239,7 +239,7 @@ JOIN country USING (country_id);
 -- (Hint: you may need to use the following tables: category, film_category, inventory, payment, and rental.)
 SELECT 
 	name, 
-    SUM(amount) AS 'Gross Revenue $'
+    	SUM(amount) AS 'Gross Revenue $'
 FROM rental
 JOIN inventory USING (inventory_id)
 JOIN payment USING (rental_id)
@@ -254,7 +254,7 @@ LIMIT 5;
 CREATE VIEW Top_Five_Genres AS
 SELECT 
 	name AS 'Genre',
-    SUM(amount) AS 'Gross Revenue $'
+    	SUM(amount) AS 'Gross Revenue $'
 FROM rental
 JOIN inventory USING(inventory_id)
 JOIN payment USING(rental_id)
