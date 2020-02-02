@@ -1,7 +1,7 @@
 -- SQL and SQLWorkbench Homework | Feb 1, 2020
 -- Submitted by : Sheetal Bongale | UT Data Analysis and Visualization
 -- MySQL and MySQLWorkbench exercise to execute queries on the Sakila database.
--- --------------------------------------------------------------------------- --
+-- ---------------------------------------------------------------------------- --
 USE sakila;
 SHOW TABLES;
 
@@ -70,7 +70,7 @@ GROUP BY last_name;
 -- but only for names that are shared by at least two actors:
 SELECT 
 	last_name, 
-	COUNT(last_name)
+	COUNT(last_name) 
 FROM actor
 GROUP BY last_name
 HAVING COUNT(last_name) >= 2;
@@ -89,7 +89,7 @@ WHERE first_name = 'HARPO' AND last_name = 'WILLIAMS';
 
 -- 5a. You cannot locate the schema of the address table. Which query would you use to re-create it?
 SHOW CREATE TABLE address;
-/* DESCRIBE address;*/
+DESCRIBE address;
 
 -- 6a. Use JOIN to display the first and last names, as well as the address, of each staff member. 
 -- Use the tables staff and address:
@@ -178,33 +178,13 @@ WHERE country = 'canada';
 
 -- 7d. Sales have been lagging among young families, and you wish to target all family movies for a promotion. 
 -- Identify all movies categorized as family films.
--- Option 1:
-SELECT 
-	title,
-	category 
-FROM film_list
-WHERE category = 'family';
--- Option 2:
 SELECT 
 	f.title,
-    c.name
+    c.name as 'Category'
 FROM film as f
 JOIN film_category USING (film_id)
 JOIN category as c USING(category_id)
 WHERE c.name = 'Family';
--- Option 3:
-SELECT f.title
-FROM film AS f
-WHERE film_id IN
-	(
-	SELECT film_id
-	FROM film_category
-	WHERE category_id IN
-	(
-		SELECT category_id 
-		FROM category AS c
-		WHERE c.name = 'Family'
-	));
 
 -- 7e. Display the most frequently rented movies in descending order.
 SELECT 
